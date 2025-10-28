@@ -10,6 +10,7 @@ export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); 
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -33,9 +34,16 @@ export default function MovieDetails() {
     fetchMovie();
   }, [id, navigate]);
 
+  useEffect(() => {
+    if (searchTerm.trim() !== "") {
+      navigate(`/?query=${searchTerm}`);
+    }
+  }, [searchTerm, navigate]);
+
   return (
     <div className="bg-gray-900 min-h-screen text-white">
-      <NavBar />
+      <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
       <div className="max-w-5xl mx-auto p-6">
         {loading ? (
           <div className="animate-pulse flex flex-col md:flex-row gap-6 mt-10 items-center md:items-start">
@@ -102,6 +110,7 @@ export default function MovieDetails() {
           </div>
         )}
       </div>
+
       <Footer />
     </div>
   );
