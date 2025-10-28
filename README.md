@@ -5,8 +5,10 @@
 Built with **React + Tailwind CSS**, it provides a modern and intuitive movie-browsing experience.
 
 ---
+## 🌍 Live Demo
+👉 [Visit FlickFinder on Vercel](https://flickfinder-one.vercel.app/)
 
-
+---
 ## 🚀 Features
 
 - 🔍 **Search Movies** – Instantly find movies by title  
