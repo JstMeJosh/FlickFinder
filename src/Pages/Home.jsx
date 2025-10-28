@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import tmdb from "../axiosInstance";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -10,6 +10,15 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const location = useLocation(); // 👈 detects URL changes
+
+  // 👇 Listen for ?query= in the URL and update searchTerm
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get("query") || "";
+    setSearchTerm(query);
+  }, [location]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -35,6 +44,7 @@ export default function Home() {
         setLoading(false);
       }
     };
+
     const delay = setTimeout(() => {
       fetchMovies();
     }, 400);
@@ -131,7 +141,7 @@ export default function Home() {
         </div>
       )}
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
